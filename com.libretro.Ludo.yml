@@ -1,0 +1,129 @@
+id: com.libretro.Ludo
+branch: master
+runtime: org.freedesktop.Platform
+runtime-version: "19.08"
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.golang
+command: "ludo"
+finish-args:
+  - "--share=network"
+  - "--socket=wayland"
+  - "--socket=fallback-x11"
+  - "--share=ipc" # Necessary for X11
+  - "--socket=pulseaudio"
+  - "--device=dri" # OpenGL rendering
+  - "--filesystem=home" # Access to ROM files and, sadly, to ~/.ludo
+  - "--device=all" # For controllers.
+tags:
+  - unofficial
+build-options:
+  build-args:
+    - "--share=network"
+modules:
+  - name: ludo
+    sources:
+      - type: git
+        url: git://github.com/libretro/ludo.git
+    buildsystem: simple
+    build-commands:
+      - "sed -i 's+./cores+/app/lib/libretro+g' settings/defaults.go"
+      - "sed -i 's+./assets+/app/share/ludo/assets+g' settings/defaults.go"
+      - "sed -i 's+./database+/app/share/ludo/database+g' settings/defaults.go"
+      - "/usr/lib/sdk/golang/bin/go build -o /app/bin/ludo"
+      - "mkdir -p /app/share/ludo"
+      - "cp -r assets /app/share/ludo/assets"
+      - "cp -r database /app/share/ludo/database"
+      - "mkdir -p /app/share/icons/hicolor/scalable/apps"
+      - "cp assets/icon.svg /app/share/icons/hicolor/scalable/apps/com.libretro.Ludo.svg"
+  - name: cores # Because of this module, the manifest works only with x86_64 arch.
+    sources:
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/bluemsx_libretro.so.zip
+        sha256: 200ac91011aa01d0d90c9af95534069bd1a07a209e7e7534832a970ff63d1075
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/chailove_libretro.so.zip
+        sha256: a5effca7a0f858077b6e9bc51bd1884179ddcc26b731eb1f1123d7ac659c1434
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/fbneo_libretro.so.zip
+        sha256: da6c8430cfe415bd1d747871035d4ff4ecfab7a453037bf8ed1e06a4357e82b4
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/fceumm_libretro.so.zip
+        sha256: 04883b3a0753eabf4d71414e91ca39c1c26d56e9fad8248ced27ef5f2719e192
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/gambatte_libretro.so.zip
+        sha256: c57296e9827f1358e2f43b6e43cd623e7ec7fd40e2aa3021c637e6eabdaefc86
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/genesis_plus_gx_libretro.so.zip
+        sha256: 2b63c880ec7672aacf4818bda0f6d7fa189b498570b163d54016fd0618e16a2a
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/handy_libretro.so.zip
+        sha256: cf2134141c18c9a78c82bc8458b13e761d786726a0488b68cf54b7d6da7a9097
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/lutro_libretro.so.zip
+        sha256: ddfe32cfe812b2fcfe3d92518fc0c1859c212c0363dab19d4bb86b6ce72bf40b
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/mednafen_ngp_libretro.so.zip
+        sha256: 2e8b4dc4e5e9d9f9c89a37ddfdac18b1ed159075a780ad269fb655ff393d5775
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/mednafen_pce_fast_libretro.so.zip
+        sha256: dbd74fceb195efec3a37ee094b950b42d45dbf18f40889a2f40ae1ee4d85f101
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/mednafen_psx_libretro.so.zip
+        sha256: 304e9a796847c4b79f0ea14a062f59ea748b7d8bf16d32ce4c639a41e779a74c
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/mednafen_saturn_libretro.so.zip
+        sha256: 1e54dd46d83e19c3497b138e3050dbc986a1b44256f0e37fca17d6c805e9046e
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/mednafen_supergrafx_libretro.so.zip
+        sha256: 27fec7f67124f3286f2e9f47919ecc60e462cd9296039340befb3d5152905556
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/mednafen_vb_libretro.so.zip
+        sha256: 31d6b84de828d2072e94e0a97ebad6d7fe8b5b58cd9c12ff84bcfb1451826448
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/mednafen_wswan_libretro.so.zip
+        sha256: 7d2f58f65c4bb4a278f2cf7d62a460acba4157eb57f1e0b8b7b3237f7c1ec09c
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/mgba_libretro.so.zip
+        sha256: fa9958eb46aa04adeb5642b9a358047bc301cc97de16226f6c8354a4d2bf36e8
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/np2kai_libretro.so.zip
+        sha256: 153cd0503209ff030dd34cba0733be08d5a86b51562183998bbea392a3525889
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/o2em_libretro.so.zip
+        sha256: 5796766dc3007ae3d080549caeb0ddf870b1f3ed56fb3a91dfca819876aa5c2a
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/pcsx_rearmed_libretro.so.zip
+        sha256: 98c81a16bf53a70a240c9d11a32cf48437ceedaf359d0080b77af127cdeb3e5e
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/picodrive_libretro.so.zip
+        sha256: 7444603b56f7e8ff9b38c4bf443d2efe406cea0ed524b9be5e0fef00f9fa8f18
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/pokemini_libretro.so.zip
+        sha256: 926449fb22df105e23fa104b92c2f75a21bbace607551f4959414a30a44df225
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/prosystem_libretro.so.zip
+        sha256: e2748b0d26ae8ec3fcfa34685fb245d4d41015d15b60138f9c91419d894a7034
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/snes9x_libretro.so.zip
+        sha256: 383a3a1dc834e266d648d75b5f06c74dd2c75681b65f0e07fb4e5083a151fe70
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/stella_libretro.so.zip
+        sha256: d6ebc4a5dd167cba7b60b58fa6e89c1f98e6218ccc91adcd9855f3f378f54131
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/vecx_libretro.so.zip
+        sha256: bb15001478740ce0df7d30672863a0324883f8ca2163d45947c8ea61f2bfb914
+      - type: archive
+        url: http://buildbot.libretro.com/nightly/linux/x86_64/latest/virtualjaguar_libretro.so.zip
+        sha256: cf1bc197cd92e63dfebcc1b0c530b56b8687272175548006ee22eda33fb25f91
+    buildsystem: simple
+    build-commands:
+      - "mkdir -p /app/lib/libretro"
+      - "cp *_libretro.so /app/lib/libretro/"
+  - name: extra
+    sources:
+      - type: file
+        path: com.libretro.Ludo.desktop
+    buildsystem: simple
+    build-commands:
+      - install -Dm644 -t /app/share/applications com.libretro.Ludo.desktop

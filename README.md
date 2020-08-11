@@ -23,6 +23,36 @@ This manifest is obsolete:
 - Since september 2017, Gradio has an [official flatpak manifest](https://github.com/flathub/de.haeckerfelix.gradio).
 - Since november 2019, Gradio is unmaintained and replaced by [Shortwave](https://gitlab.gnome.org/World/Shortwave).
 
+## Ludo
+
+A minimalist frontend for emulators.
+
+- https://ludo.libretro.com/
+- https://github.com/libretro/ludo/
+
+Dependencies:
+
+- org.freedesktop.Platform 19.08
+- org.freedesktop.Sdk 19.08
+- org.freedesktop.Sdk.Extension.golang
+
+Build as a Flatpak package:
+
+```bash
+git clone https://github.com/pdureau/flatpak-manifests.git
+cd flatpak-manifests
+make ludo
+```
+
+Deploy from your local repository:
+
+```bash
+flatpak remote-add --user local "file://`pwd`/repo" --no-gpg-verify
+flatpak install --user local com.libretro.Ludo
+```
+
+Because this manifest expects a network access during building, it may not be accepted by flathub team.
+
 # Colophon
 
-From Oct 2015 to Dec 2016, this repository was a fork of alexlarsson/nightly-build-apps known as pdureau/nightly-build-apps. With the advent of flatpak builder, it became cleaner to keep it as a new repository.
+From Oct 2015 to Dec 2016, this repository was a fork of [alexlarsson/nightly-build-apps](https://github.com/alexlarsson/nightly-build-apps) known as pdureau/nightly-build-apps. With the advent of [flatpak builder](https://docs.flatpak.org/en/latest/flatpak-builder.html), it became cleaner to keep it as a new repository.
