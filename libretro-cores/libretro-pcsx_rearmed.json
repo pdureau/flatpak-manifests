@@ -1,0 +1,28 @@
+{
+  "name": "libretro-pcsx_rearmed",
+  "skip-arches": ["arm"],
+  "no-autogen": true,
+  "rm-configure": true,
+  "make-args": ["--makefile=Makefile.install", "prefix=/app"],
+  "make-install-args": ["--makefile=Makefile.install", "prefix=/app"],
+  "post-install": [
+    "mkdir -p /app/lib/libretro/",
+    "install -m644 -p pcsx_rearmed.libretro /app/lib/libretro/"
+  ],
+  "sources": [
+    {
+      "type": "git",
+      "url": "https://github.com/libretro/pcsx_rearmed",
+      "commit": "41ed0ee3ff0f83bf53b010e4d79ca1de5389e8f2"
+    },
+    {
+      "type": "file",
+      "path": "pcsx_rearmed-Makefile.install",
+      "dest-filename": "Makefile.install"
+    },
+    {
+      "type": "file",
+      "path": "pcsx_rearmed.libretro"
+    }
+  ]
+}

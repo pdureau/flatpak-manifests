@@ -1,0 +1,30 @@
+[Libretro]
+Type=Emulator
+Version=1.0
+Name=PCSX ReARMed
+Module=pcsx_rearmed_libretro.so
+LibretroVersion=1
+Authors=PCSX Team;notaz;Exophase;
+License=GPL-2.0+;
+
+[Platform:PlayStation]
+MimeType=application/x-cue;application/x-playstation-rom;
+Firmwares=PlayStationE;PlayStationJ;PlayStationU;
+
+[Firmware:PlayStationE]
+Path=scph5502.bin
+MD5=32736f17079d0b2b7024407c39bd3050
+SHA-512=45d3c9549030a187ce174f222238637c534a4b17eb28047a02aaa9c05f002f68a9724392d03800294e1246de86386de2ef00a242c7306dd6aaa50b41906ae76a
+Mandatory=false
+
+[Firmware:PlayStationJ]
+Path=scph5500.bin
+MD5=8dd7d5296a650fac7319bce665a6a53c
+SHA-512=45afbc30b189ee84db54f329b61dea51336b5b38c47a0f0a7035edfaeb61981c8c8babdb6c8d743f7e7b6a05b8c6bd4e73e4f7a4a81fa459107407eceae345d7
+Mandatory=false
+
+[Firmware:PlayStationU]
+Path=scph5501.bin
+MD5=490f666e1afb15b7362b406ed1cea246
+SHA-512=6fb786f2bc77c29a52999d23f85d3ebf8dc0a23e849ab4ec5cd3c7cca42055332004263f674152846fc0cb1500f67d52a1ec244a8224b59e48b245c6adb4d5fb
+Mandatory=false

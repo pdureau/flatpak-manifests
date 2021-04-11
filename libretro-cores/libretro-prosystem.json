@@ -1,0 +1,21 @@
+{
+  "name": "libretro-prosystem",
+  "no-autogen": true,
+  "make-args": ["prefix=/app", "core_installdir=/app/lib/libretro"],
+  "make-install-args": ["prefix=/app", "core_installdir=/app/lib/libretro"],
+  "post-install": [
+    "mkdir -p /app/lib/libretro/",
+    "install -m644 -p prosystem.libretro /app/lib/libretro/"
+  ],
+  "sources": [
+    {
+      "type": "git",
+      "url": "https://github.com/libretro/prosystem-libretro",
+      "commit": "b4f454db530390dcf2f8b986bfef638b83b118f0"
+    },
+    {
+      "type": "file",
+      "path": "prosystem.libretro"
+    }
+  ]
+}

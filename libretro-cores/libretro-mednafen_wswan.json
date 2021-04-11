@@ -1,0 +1,21 @@
+{
+  "name": "libretro-mednafen_wswan",
+  "no-autogen": true,
+  "make-args": ["prefix=/app", "core_installdir=/app/lib/libretro"],
+  "make-install-args": ["prefix=/app", "core_installdir=/app/lib/libretro"],
+  "post-install": [
+    "mkdir -p /app/lib/libretro/",
+    "install -m644 -p mednafen_wswan.libretro /app/lib/libretro/"
+  ],
+  "sources": [
+    {
+      "type": "git",
+      "url": "https://github.com/libretro/beetle-wswan-libretro",
+      "commit": "79e8d4836aa000775a8fa8a5522ff259d00c43b5"
+    },
+    {
+      "type": "file",
+      "path": "mednafen_wswan.libretro"
+    }
+  ]
+}

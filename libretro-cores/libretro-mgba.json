@@ -1,0 +1,21 @@
+{
+  "name": "libretro-mgba",
+  "no-autogen": true,
+  "make-args": ["prefix=/app", "core_installdir=/app/lib/libretro"],
+  "make-install-args": ["prefix=/app", "core_installdir=/app/lib/libretro"],
+  "post-install": [
+    "mkdir -p /app/lib/libretro/",
+    "install -m644 -p mgba.libretro /app/lib/libretro/"
+  ],
+  "sources": [
+    {
+      "type": "git",
+      "url": "https://github.com/libretro/mgba",
+      "commit": "c1794e1072b21406ae58a56496882fdf2e28770d"
+    },
+    {
+      "type": "file",
+      "path": "mgba.libretro"
+    }
+  ]
+}

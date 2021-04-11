@@ -1,0 +1,21 @@
+{
+  "name": "libretro-gambatte",
+  "no-autogen": true,
+  "make-args": ["prefix=/app", "core_installdir=/app/lib/libretro"],
+  "make-install-args": ["prefix=/app", "core_installdir=/app/lib/libretro"],
+  "post-install": [
+    "mkdir -p /app/lib/libretro/",
+    "install -m644 -p gambatte.libretro /app/lib/libretro/"
+  ],
+  "sources": [
+    {
+      "type": "git",
+      "url": "https://github.com/libretro/gambatte-libretro.git",
+      "commit": "f514aa29a0b8b51be8aee8e2b0e50b9f80bcedb9"
+    },
+    {
+      "type": "file",
+      "path": "gambatte.libretro"
+    }
+  ]
+}

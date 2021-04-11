@@ -1,0 +1,21 @@
+{
+  "name": "libretro-mednafen_ngp",
+  "no-autogen": true,
+  "make-args": ["prefix=/app", "core_installdir=/app/lib/libretro"],
+  "make-install-args": ["prefix=/app", "core_installdir=/app/lib/libretro"],
+  "post-install": [
+    "mkdir -p /app/lib/libretro/",
+    "install -m644 -p mednafen_ngp.libretro /app/lib/libretro/"
+  ],
+  "sources": [
+    {
+      "type": "git",
+      "url": "https://github.com/libretro/beetle-ngp-libretro",
+      "commit": "6e24fca9115aaa2fceee76dad36544403b692722"
+    },
+    {
+      "type": "file",
+      "path": "mednafen_ngp.libretro"
+    }
+  ]
+}

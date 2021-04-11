@@ -1,0 +1,11 @@
+[Libretro]
+Type=Emulator
+Version=1.0
+Name=Beetle VB
+Module=mednafen_vb_libretro.so
+LibretroVersion=1
+Authors=Mednafen Team;
+License=GPL-2.0+;
+
+[Platform:VirtualBoy]
+MimeType=application/x-virtual-boy-rom;
